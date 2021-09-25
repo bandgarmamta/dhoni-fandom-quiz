@@ -1,10 +1,27 @@
+var chalk = require("chalk");
 var readlineSync = require("readline-sync")
 var userName = readlineSync.question("Your name please: ");
-console.log("Welcome "+userName+ "! Are you a true Dhoni fan? \n Let's See");
-console.log("---------------------------------")
+console.log(chalk.yellow("Welcome "+userName+ "! Are you a true Dhoni fan? \n Let's See"));
+console.log(chalk.black("---------------------------------"))
 
 
 var score = 0;
+
+function game(i,options,question,answer){
+  console.log("Q"+(i+1))
+  var userAnswer = readlineSync.keyInSelect(options,question);
+ 
+  if(userAnswer + 1 === answer)
+  {
+    score = score + 1;
+    console.log(chalk.green("Your are a true MSDian!\nYour current score is: "+score));
+
+  }
+  else{
+    console.log(chalk.red("To your knowledge, the correct answer is "+answer+"\nYour current score is: "+score))
+
+  }
+}
 
 var highscore = [
   {
@@ -20,62 +37,37 @@ var highscore = [
 var questions = [
   {
     question:"When did Dhoni play his first Test match? ",
-    a:"2002",
-    b:"2003",
-    c:"2005",
-    answer:"2005"},
+    option:["2005","2003","2001"],
+    answer:1},
   {
     question:"Which railway zone did dhoni work for, as a TTE? ",
-    a:"South Eastern Railways",
-    b:"Western Railways",
-    c:"Northen Railways",
-    answer:"South Eastern Railways"},
+    option:["South Eastern Railways","Western Railways","Northen Railways"],
+    answer:1,
+  },
   {
     question:"Which team did Dhoni make his Ranji trophy debut for?  ",
-    a:"Ranchi",
-    b:"Bihar",
-    c:"Madhya Pradesh",
-    answer:"Bihar"},
+    option:["Ranchi","Bihar","Madhya Pradesh"],
+    answer:2
+    },
   {
     question:"Apart form cricket, which sport does Dhoni play? ",
-    a:"Badminton",
-    b:"Football",
-    c:"Hockey",
-    answer:"Football"
+    option:["Badminton","Football","Hockey"],
+    answer:2
   },
   {
     question:"Dhoni's favourite pet's name is ",
-    a:"Joe",
-    b:"Sam",
-    c:"Roney",
-    answer:"Sam"
+    option:["Roney","Joe","Sam"],
+    answer:3
   },
   ]
-
+  
+  
 for (var i = 0;i<questions.length;i++){
-   game(questions[i].question, questions[i].answer,questions[i].a,questions[i].b,questions[i].c)
+   game(i,questions[i].option, questions[i].question,questions[i].answer)
 
    console.log("---------------------------------")
   }
 
-console.log("Your final score is: "+score)
-console.log("\nHighscore: \nName:"+highscore[0].name+"  Score:"+highscore[0].score+"\nName:"+highscore[1].name+"  Score:"+highscore[1].score+"\n If you exceed the highscore, pls ping me I will update.");
-
-  
-function game(question, answer,a,b,c){
-  console.log(question + "\na: "+a+"\nb: "+b+"\nc: "+c)
-  var option = readlineSync.question("Write your answer:")
-  if(option.toUpperCase() === answer.toUpperCase())
-  {
-    score = score + 1;
-    console.log("Your are a true MSDian!\nYour current score is: "+score);
-
-  }
-  else{
-    console.log("To your knowledge, the correct answer is "+answer+"\nYour current score is: "+score)
-
-  }
-}
-  
-
+console.log(chalk.cyan("Your final score is: "+score));
+console.log(chalk.yellow("\nHighscore: \n Name:"+highscore[0].name+"  Score:"+highscore[0].score+"\n Name:"+highscore[1].name+"  Score:"+highscore[1].score+"\n If you exceed the highscore, pls ping me I will update."));
 
