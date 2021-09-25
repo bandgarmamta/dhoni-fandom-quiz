@@ -53,7 +53,7 @@ var questions = [
   ]
 
 for (var i = 0;i<questions.length;i++){
-   game(questions[i].question, questions[i].answer)
+   game(questions[i].question, questions[i].answer,questions[i].a,questions[i].b,questions[i].c)
 
    console.log("---------------------------------")
   }
@@ -62,12 +62,13 @@ console.log("Your final score is: "+score)
 console.log("\nHighscore: \nName:"+highscore[0].name+"  Score:"+highscore[0].score+"\nName:"+highscore[1].name+"  Score:"+highscore[1].score+"\n If you exceed the highscore, pls ping me I will update.");
 
   
-function game(question, answer){
-  var userAnswer = readlineSync.question(question);
-  if(userAnswer.toUpperCase() === answer.toUpperCase())
+function game(question, answer,a,b,c){
+  console.log(question + "\na: "+a+"\nb: "+b+"\nc: "+c)
+  var option = readlineSync.question("Write your answer:")
+  if(option.toUpperCase() === answer.toUpperCase())
   {
     score = score + 1;
-    console.log("Your answer is absoultly right!\nYour current score is: "+score);
+    console.log("Your are a true MSDian!\nYour current score is: "+score);
 
   }
   else{
